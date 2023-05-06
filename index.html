@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SaturatedDepictions - Videographer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&family=Vina+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="topBar">
+        <p class="siteTitle">SaturatedDepictions</p>
+        <nav>
+            <li>Home</li>
+            <li>Projects</li>
+        </nav>
+        <a class="cta" href="#"><button>Contact</button></a>
+    </div>
+    <div class="projectsBox">
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide"><iframe width="1038" height="513" src="https://www.youtube.com/embed/WYd4NNngiAk?html5=1&rel=0&enablejsapi=1" title="Rich Off Swagg Pt 2 (official video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                <div class="swiper-slide"><iframe width="1038" height="513" src="https://www.youtube.com/embed/X_hB4yWSf_w?html5=1&rel=0&enablejsapi=1" title="GSKI - Saint Laurent (OFFICIAL VIDEO)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                <div class="swiper-slide"><iframe width="1038" height="513" src="https://www.youtube.com/embed/0Yv_7QST4r4?html5=1&rel=0&enablejsapi=1" title="U-Turn - MixeraBenji$ (Official Music Video) [ Shot by : SaturatedDepictions ]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                ...
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+        </div>
+    </div>
+    <div class="contactBox">
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            loop: true,
+            autoplay: false,
+            observer: true,
+            slidesPerView: 'auto',
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            //pause video on slide change
+            on: {
+                slideChange: function (el) {
+                    let prevSlide = this.slides[this.previousIndex];
+                    let prevPlayer = prevSlide.querySelector('iframe');
+                    prevPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+
+                    let currentSlide = this.slides[this.activeIndex];
+                    let currentPlayer = currentSlide.querySelector('iframe');
+                    currentPlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
